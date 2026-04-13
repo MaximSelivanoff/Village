@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pomeshchik-estate
+    ports:
+      - "3000:3000"
+    volumes:
+      # Монтируем исходный код для hot-reload при разработке
+      - .:/app
+      # Исключаем node_modules из хоста, используем контейнерные
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_HOST=0.0.0.0
